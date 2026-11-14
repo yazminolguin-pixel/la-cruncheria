@@ -34,11 +34,13 @@
   var SELLOS = { C: "Exceso calorías", A: "Exceso azúcares", G: "Exceso grasas saturadas", S: "Exceso sodio" };
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  /* Canal para pedir: WhatsApp si hay número; si no, mensaje directo de Instagram */
+  var CANAL = CONFIG.whatsapp ? { nombre: "WhatsApp", icono: I.wa, clase: "" } : { nombre: "Instagram", icono: I.ig, clase: " wa-flotante--ig" };
+  function igLink() { return CONFIG.instagram ? "https://www.instagram.com/" + CONFIG.instagram + "/" : "#"; }
   function waLink(msg) {
-    var base = CONFIG.whatsapp ? "https://wa.me/" + CONFIG.whatsapp : "https://wa.me/";
-    return base + "?text=" + encodeURIComponent(msg || "Hola, quiero hacer un pedido en " + CONFIG.negocio + ".");
+    if (!CONFIG.whatsapp) return CONFIG.instagram ? "https://ig.me/m/" + CONFIG.instagram : "#";
+    return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(msg || "Hola, quiero hacer un pedido en " + CONFIG.negocio + ".");
   }
-  function igLink() { return CONFIG.instagram ? "https://instagram.com/" + CONFIG.instagram : "#"; }
   function dinero(n) { return "$" + Number(n).toLocaleString("es-MX", { minimumFractionDigits: 0, maximumFractionDigits: 2 }); }
   function sinTrigo(p) { return p.alergenos.indexOf("gluten") < 0 && !p.glutenDuda && p.ingredientes.indexOf("Pendiente") < 0; }
 
@@ -51,9 +53,7 @@
     var subs = CATEGORIAS.map(function (c) {
       return '<a class="menu__sub" href="' + c.archivo + '"' + (catActual === c.slug ? ' aria-current="page"' : "") + ">" + esc(c.nombre) + "</a>";
     }).join("");
-    var aviso = CONFIG.whatsapp ? "" : '<div class="pendiente-config">Vista previa: falta agregar el número de WhatsApp y el usuario de Instagram en <code>assets/data.js</code>.</div>';
-    return aviso +
-      '<header class="encabezado"><div class="contenedor encabezado__fila">' +
+    return '<header class="encabezado"><div class="contenedor encabezado__fila">' +
       '<a class="marca" href="index.html" aria-label="' + esc(CONFIG.negocio) + ', inicio">' +
       '<span class="marca__logo"><img src="assets/logo.jpg" alt="" width="46" height="46"></span>' +
       '<span class="marca__nombre">' + esc(CONFIG.negocio) + "<small>HEALTHY SNACKS</small></span></a>" +
@@ -63,7 +63,7 @@
       '<a href="index.html#catalogo"' + (pagina === "categoria" ? ' aria-current="page"' : "") + ">Catálogo</a>" + subs +
       '<a href="como-pedir.html"' + actual("pedir") + ">Cómo pedir</a>" +
       '<a href="ingredientes.html"' + actual("ingredientes") + ">Ingredientes y FAQ</a>" +
-      '<a class="btn btn--principal btn--chico" href="' + waLink() + '" target="_blank" rel="noopener">' + I.wa + "Pedir</a>" +
+      '<a class="btn btn--principal btn--chico" href="' + waLink() + '" target="_blank" rel="noopener">' + CANAL.icono + "Pedir</a>" +
       "</nav></div></header>";
   }
 
@@ -75,14 +75,14 @@
       '<p style="margin-top:16px;max-width:340px">Snacks para darte un gustito con una opción más consciente. Entregas en ' + esc(CONFIG.ciudad) + ".</p></div>" +
       "<div><h4>Catálogo</h4><ul>" + cats + "</ul></div>" +
       '<div><h4>Contacto</h4><ul>' +
-      '<li><a href="' + waLink() + '" target="_blank" rel="noopener">WhatsApp</a></li>' +
+      (CONFIG.whatsapp ? '<li><a href="' + waLink() + '" target="_blank" rel="noopener">WhatsApp</a></li>' : "") +
       '<li><a href="' + igLink() + '" target="_blank" rel="noopener">Instagram' + (CONFIG.instagram ? " @" + esc(CONFIG.instagram) : "") + "</a></li>" +
       "<li>" + esc(CONFIG.horario) + "</li>" +
       '<li><a href="como-pedir.html">Cómo pedir</a></li><li><a href="ingredientes.html">Ingredientes y alérgenos</a></li>' +
       "</ul></div></div>" +
       '<div class="pie__legal"><span>© ' + new Date().getFullYear() + " " + esc(CONFIG.negocio) + " · " + esc(CONFIG.ciudad) + ", Q. Roo</span><span>Información nutrimental por porción de 100 g.</span></div>" +
       "</div></footer>" +
-      '<a class="wa-flotante" href="' + waLink() + '" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">' + I.wa + "</a>";
+      '<a class="wa-flotante' + CANAL.clase + '" href="' + waLink() + '" target="_blank" rel="noopener" aria-label="Escríbenos por ' + CANAL.nombre + '">' + CANAL.icono + "</a>";
   }
 
   /* ---------- Piezas reutilizables ---------- */
@@ -136,7 +136,7 @@
       (p.leyenda ? '<p class="leyenda">' + esc(p.leyenda) + "</p>" : "") +
       '<div class="producto__bloque"><h4>Ingredientes</h4><p class="ingredientes">' + esc(p.ingredientes) + "</p></div>" +
       sellos + tablaNutri(p) +
-      '<div class="producto__acciones"><a class="btn btn--principal" href="' + waLink(msg) + '" target="_blank" rel="noopener">' + I.wa + "Pedir por WhatsApp</a></div>" +
+      '<div class="producto__acciones"><a class="btn btn--principal" href="' + waLink(msg) + '" target="_blank" rel="noopener">' + CANAL.icono + "Pedir por " + CANAL.nombre + "</a></div>" +
       "</div></article>";
   }
 
@@ -214,7 +214,15 @@
       }).join("");
     }
 
-    document.querySelectorAll("[data-wa]").forEach(function (a) { a.href = waLink(a.getAttribute("data-wa") || ""); a.target = "_blank"; a.rel = "noopener"; });
+    document.querySelectorAll("[data-solo-wa]").forEach(function (e) { if (!CONFIG.whatsapp) e.remove(); });
+    document.querySelectorAll("[data-wa]").forEach(function (a) {
+      a.href = waLink(a.getAttribute("data-wa") || ""); a.target = "_blank"; a.rel = "noopener";
+      if (!CONFIG.whatsapp) {
+        var svg = a.querySelector("svg"); if (svg) svg.outerHTML = I.ig;
+        var w = document.createTreeWalker(a, NodeFilter.SHOW_TEXT), t;
+        while ((t = w.nextNode())) t.nodeValue = t.nodeValue.replace("WhatsApp", "Instagram");
+      }
+    });
     document.querySelectorAll("[data-ig]").forEach(function (a) { a.href = igLink(); a.target = "_blank"; a.rel = "noopener"; });
     document.querySelectorAll("[data-horario]").forEach(function (e) { e.textContent = CONFIG.horario; });
     document.querySelectorAll("[data-ig-usuario]").forEach(function (e) { e.textContent = CONFIG.instagram ? "@" + CONFIG.instagram : "Síguenos y escríbenos por mensaje directo"; });

@@ -330,6 +330,7 @@ details.nutri[open] summary::after { content: "–"; }
   transition: transform .15s ease;
 }
 .wa-flotante:hover { transform: scale(1.06); }
+.wa-flotante--ig { background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF); }
 .wa-flotante svg { width: 30px; height: 30px; }
 
 .pendiente-config { background: #FFF3DA; border-bottom: 1px solid #F0D39A; font-size: .85rem; text-align: center; padding: 8px 16px; }

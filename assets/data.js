@@ -14,9 +14,10 @@ var CONFIG = {
   negocio: "La Cruncheria",
   ciudad: "Cancún",
   // Solo números, con lada de país. Ejemplo: "529981234567"
+  // Mientras esté vacío, los botones de "Pedir" llevan a Instagram.
   whatsapp: "",
   // Usuario sin @. Ejemplo: "lacruncheria"
-  instagram: "",
+  instagram: "lacruncheria.9",
   horario: "Lunes a sábado, de 9:00 am a 8:00 pm",
   envioGratisDesde: 300
 };

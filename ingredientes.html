@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ingredientes, alérgenos y preguntas frecuentes · La Cruncheria</title>
+  <meta name="description" content="Ingredientes, alérgenos y respuestas claras sobre cada snack de La Cruncheria.">
+  <meta name="theme-color" content="#E0591C">
+  <link rel="icon" href="assets/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&family=Roboto+Slab:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-pagina="ingredientes">
+  <div id="encabezado"></div>
+
+  <main>
+    <section class="cabecera-cat">
+      <div class="contenedor">
+        <nav class="migas" aria-label="Ruta"><a href="index.html">Inicio</a> / Ingredientes y FAQ</nav>
+        <span class="etiqueta">Transparencia</span>
+        <h1>Lo que lleva cada snack</h1>
+        <p>Queremos que elijas con toda la información. No todo nuestro catálogo es 100% natural; aquí te contamos qué lleva cada producto, sus alérgenos y lo que conviene saber.</p>
+      </div>
+    </section>
+
+    <section class="seccion" style="padding-top:8px">
+      <div class="contenedor">
+        <div class="claves">
+          <div class="clave">
+            <h3>Llevan gluten</h3>
+            <p>Las <strong>obleas</strong>, las <strong>choco obleas</strong> y los <strong>churritos de amaranto</strong> llevan harina de trigo.</p>
+          </div>
+          <div class="clave">
+            <h3>Maicitos</h3>
+            <p>Llevan <strong>colorantes artificiales</strong> (rojo 40 y amarillo 5), <strong>azúcar</strong>, saborizante artificial, glutamato monosódico y suero de leche.</p>
+          </div>
+          <div class="clave">
+            <h3>No todo es 100% natural</h3>
+            <p>Ningún producto incluye conservadores químicos en sus ingredientes, pero algunos llevan saborizantes, colorantes, azúcar o stevia. Lo marcamos en cada uno.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion seccion--arena">
+      <div class="contenedor">
+        <div class="titulo-seccion">
+          <span class="etiqueta">Alérgenos</span>
+          <h2>Tabla de alérgenos y avisos</h2>
+          <p>Según la lista de ingredientes de cada producto. Si tienes una alergia severa, escríbenos antes de pedir: no podemos garantizar que no haya trazas.</p>
+        </div>
+        <div class="matriz-wrap"><table class="matriz" id="matriz"></table></div>
+        <p style="margin-top:14px;font-size:.88rem;color:var(--texto-2)"><span class="si" style="width:18px;height:18px;font-size:.6rem">●</span> Alérgeno &nbsp; <span class="si si--aviso" style="width:18px;height:18px;font-size:.6rem">●</span> Aviso &nbsp; <span class="si si--aviso" style="width:18px;height:18px;font-size:.6rem">?</span> Por confirmar</p>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <div class="contenedor">
+        <div class="titulo-seccion">
+          <span class="etiqueta">Ingredientes</span>
+          <h2>Ingredientes por producto</h2>
+        </div>
+        <div class="acordeon" id="lista-ingredientes"></div>
+      </div>
+    </section>
+
+    <section class="seccion seccion--blanca" id="faq">
+      <div class="contenedor" style="max-width:860px">
+        <div class="titulo-seccion">
+          <span class="etiqueta">Preguntas frecuentes</span>
+          <h2>Lo que más nos preguntan</h2>
+        </div>
+        <div class="acordeon">
+          <details>
+            <summary>¿Todo su catálogo es 100% natural?</summary>
+            <div class="respuesta"><p>No, y preferimos decírtelo claro. Ningún producto incluye conservadores químicos en su lista de ingredientes. Pero los <strong>maicitos</strong> llevan colorantes artificiales, saborizante artificial, glutamato monosódico y azúcar. Las <strong>choco obleas</strong> llevan azúcar añadida y algunos productos llevan stevia. Lo verás marcado en cada producto.</p></div>
+          </details>
+          <details>
+            <summary>¿Qué productos llevan gluten?</summary>
+            <div class="respuesta"><p>Las <strong>obleas de amaranto</strong>, las <strong>choco obleas</strong> y los <strong>churritos de amaranto</strong> llevan harina de trigo. En los <strong>maicitos</strong>, la proteína vegetal hidrolizada no especifica su origen, así que pregúntanos si eres sensible al gluten. El resto no lleva trigo en sus ingredientes, aunque no podemos garantizar que no tengan trazas.</p></div>
+          </details>
+          <details>
+            <summary>¿Tienen opciones sin azúcar añadida?</summary>
+            <div class="respuesta"><p>Sí, la mayoría. Llevan azúcar las <strong>choco obleas</strong> (22 g de azúcar añadida por cada 100 g) y los <strong>maicitos</strong> (el azúcar aparece en sus ingredientes). Las obleas de amaranto y las chips de plátano canela llevan <strong>stevia</strong> como edulcorante.</p></div>
+          </details>
+          <details>
+            <summary>Si la fruta no lleva azúcar añadida, ¿por qué tiene tanta azúcar?</summary>
+            <div class="respuesta"><p>Al deshidratarla, el azúcar natural de la fruta se concentra. Por eso 100 g de mango o piña deshidratados tienen bastantes azúcares, aunque no les agregamos nada.</p></div>
+          </details>
+          <details>
+            <summary>¿Qué significan los sellos negros?</summary>
+            <div class="respuesta"><p>Son los sellos de advertencia de la NOM-051 (por ejemplo, “Exceso calorías” o “Exceso sodio”). Los mostramos tal como vienen en la información de cada producto, para que decidas con claridad.</p></div>
+          </details>
+          <details>
+            <summary>Tengo una alergia. ¿Puedo pedir?</summary>
+            <div class="respuesta"><p>Revisa la tabla de alérgenos de esta página y escríbenos antes de pedir. Te ayudamos a elegir, pero no podemos garantizar que no haya trazas de otros alérgenos.</p></div>
+          </details>
+          <details>
+            <summary>¿La información nutrimental es por bolsa?</summary>
+            <div class="respuesta"><p>No, es por cada 100 g de producto, para que puedas comparar fácilmente entre snacks.</p></div>
+          </details>
+          <details>
+            <summary>¿Cuánto cuesta el envío?</summary>
+            <div class="respuesta"><p>La entrega a domicilio es gratis en pedidos de más de $300 dentro de Cancún. Si tu pedido es menor, te ofrecemos puntos de encuentro en plazas; escríbenos y lo coordinamos.</p></div>
+          </details>
+          <details>
+            <summary>¿Cómo puedo pagar?</summary>
+            <div class="respuesta"><p>En efectivo al recibir o por transferencia bancaria.</p></div>
+          </details>
+          <details>
+            <summary>¿En qué horario atienden?</summary>
+            <div class="respuesta"><p data-horario></p></div>
+          </details>
+        </div>
+        <div class="botones" style="margin-top:28px">
+          <a class="btn btn--principal" data-wa="Hola, tengo una pregunta sobre sus snacks.">¿Otra pregunta? Escríbenos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="pie"></div>
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

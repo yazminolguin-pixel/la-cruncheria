@@ -17,7 +17,7 @@ var CONFIG = {
   // Mientras esté vacío, los botones de "Pedir" llevan a Instagram.
   whatsapp: "",
   // Usuario sin @. Ejemplo: "lacruncheria"
-  instagram: "lacruncheria.9",
+  instagram: "la_cruncheria_mx",
   horario: "Lunes a sábado, de 9:00 am a 8:00 pm",
   envioGratisDesde: 300
 };
